@@ -1,0 +1,88 @@
+/** Search form */
+.search-form {
+  @extend .form-inline;
+}
+
+.search-form label {
+  @extend .form-group;
+
+  font-weight: normal;
+}
+
+.search-form .search-field {
+  @extend .form-control;
+}
+
+.search-form .search-submit {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.woocommerce-input-wrapper {
+  width: 100%;
+}
+
+.woocommerce-Input,
+.input-text {
+  width: 100%;
+  background-color: #f8f9ff;
+  border: 1px solid #e5dcff;
+  border-radius: 8px;
+  padding: 15px 15px;
+}
+
+.password-input {
+  width: 100%;
+
+  .woocommerce-Input {
+    padding-right: 40px;
+  }
+}
+
+.woocommerce form .password-input input[type=password],
+.woocommerce-page form .password-input input[type=password] {
+  padding-right: 40px;
+}
+
+.woocommerce form .show-password-input,
+.woocommerce-page form .show-password-input {
+  top: calc(50% - 12px);
+  right: 15px;
+}
+
+.select2-container {
+  height: 54px;
+  border-radius: 8px;
+
+  .select2-selection--single {
+    height: 100%;
+    width: 100%;
+    background-color: #f8f9ff;
+    border: 1px solid #e5dcff;
+    border-radius: 8px;
+    padding: 12px 15px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .select2-selection__arrow {
+      height: 100%;
+      right: 15px;
+    }
+
+    .select2-selection__rendered {
+      padding-left: 0;
+    }
+  }
+
+  .select2-results__option[aria-selected=true],
+  .select2-results__option[data-selected=true] {
+    background-color: #f8f9ff;
+  }
+
+  .select2-results__option--highlighted[aria-selected],
+  .select2-results__option--highlighted[data-selected] {
+    background-color: $color-primary-1;
+  }
+}
