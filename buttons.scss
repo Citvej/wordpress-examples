@@ -1,0 +1,206 @@
+.button {
+  padding: 15px 25px !important;
+  color: $color-black-1;
+  border-radius: $border-radius-1;
+  font-weight: bold;
+  display: inline-block;
+  border: 0;
+  transition: all 0.2s ease;
+  line-height: 1 !important;
+  text-align: center;
+
+  &--primary {
+    background-color: $color-primary-1 !important;
+    color: $color-white-1 !important;
+
+    &:focus,
+    &:hover {
+      background-color: $color-secondary-1 !important;
+      color: $color-primary-1 !important;
+    }
+  }
+
+  &--secondary {
+    background-color: $color-secondary-1 !important;
+    color: $color-primary-1 !important;
+
+    &:focus,
+    &:hover {
+      background-color: $color-primary-1 !important;
+      color: $color-white-1 !important;
+    }
+  }
+
+  &--white {
+    background-color: $color-white-1 !important;
+    color: $color-black-1 !important;
+
+    &:focus,
+    &:hover {
+      background-color: $color-secondary-1 !important;
+      color: $color-primary-1 !important;
+    }
+  }
+}
+
+.button::-moz-focus-inner {
+  border: 0;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.add-to-cart-icon::before {
+  content: "";
+  background: url("../images/icon-basket--white.svg") no-repeat;
+  background-size: contain;
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.add-to-cart-icon-purple::before {
+  content: "";
+  background: url("../images/icon-basket.svg") no-repeat;
+  background-size: contain;
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+.woocommerce button.button {
+  @extend .button;
+}
+
+.woocommerce-button,
+.woocommerce-Button,
+.woocommerce.button:not(.button--white),
+.woocommerce .woocommerce-Address .edit {
+  padding: 15px 25px !important;
+  border-radius: $border-radius-1 !important;
+  font-weight: bold !important;
+  display: inline-block !important;
+  border: 0 !important;
+  background-color: $color-primary-1 !important;
+  color: $color-white-1 !important;
+
+  &:focus,
+  &:hover {
+    background-color: $color-secondary-1 !important;
+    color: $color-primary-1 !important;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .button--cta {
+    width: 100% !important;
+  }
+}
+
+input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -2px;
+    left: -2px;
+    background-color: #f8f9ff;
+    border: 1px solid #e8e0ff;
+    border-radius: 8px;
+  }
+
+  &:checked {
+    &::after {
+      content: "";
+      display: block;
+      width: 7px;
+      height: 11px;
+      border: solid #626262;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      position: absolute;
+      top: 3px;
+      left: 6px;
+    }
+  }
+}
+
+.wc-forward,
+.wc-backward {
+  @extend .button, .button--primary, .d-block;
+}
+
+.woocommerce {
+  .newsletter {
+    .button {
+      height: 100%;
+      margin: 0 !important;
+      margin-left: 15px !important;
+    }
+
+    input.button:disabled,
+    input.button:disabled[disabled] {
+      opacity: 1;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .woocommerce {
+    .newsletter {
+      .button {
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
+
+.custom-checkbox {
+  width: 26px !important;
+  height: 24px;
+}
+
+.custom_checkbox_container {
+  @extend .d-flex, .align-items-start, .justify-content-center;
+
+  .custom-checkbox,
+  label {
+    display: inline-block;
+  }
+}
+
+label.woocommerce-form__label-for-checkbox {
+  @extend .d-flex, .align-items-start;
+
+  span {
+    display: inline-block;
+    padding-left: 10px;
+  }
+}
+
+.custom__acceptance {
+  padding-left: 10px;
+  padding-top: 2px;
+  text-align: left;
+  font-size: 12px;
+  color: $color-gray-62;
+  cursor: pointer;
+}
+
+.new-appt.button {
+  font-size: 16px;
+}
