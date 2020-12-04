@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Helpers;
+
+use GuzzleHttp\Client;
+use Http;
+use Illuminate\Http\Request;
+
+class RequestSender
+{
+    protected $client;
+    protected $token;
+    protected $apiUrl;
+    protected $headers;
+    protected $cookieDurationInMinutes;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+        $this->token = $this->getTokenOrDefault();
+        $this->apiUrl = env('API_VERSION');
+        $this->headers = [
+            'cache-control' => 'no-cache',
+            'content-type' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token,
+        ];
+        $this->cookieDurationInMinutes = 6000; //100h
+    }
+
+    public function request(string $requestType, Request $request, string $endpoint = null, array $params = [])
+    {
+        $requestType = \strtolower($requestType);
+        $fullPath = $this->apiUrl;
+        $fullPath .= $endpoint;
+        $content = "";
+        
+        try {
+            $content = json_decode($request->getContent(), true);
+        } catch (Exception $e) {
+            $content = "";
+        }
+
+        if ($content == null) {
+            $content = [];
+        }
+
+        if (!empty($params)) {
+            $content = $params;
+        }
+        
+        
+        switch ($requestType) {
+            case 'get':                    
+                $apiRequest = Http::withHeaders($this->headers)->get($fullPath, $content);                 
+                break;
+            case 'post':
+                $apiRequest = Http::withHeaders($this->headers)->post($fullPath, $content);
+                break;
+            case 'put':
+                $apiRequest = Http::withHeaders($this->headers)->put($fullPath, $content);
+                break;
+            case 'delete':
+                $apiRequest = Http::withHeaders($this->headers)->delete($fullPath, $content);
+                break;
+            default:
+                return response('Invalid method type!', 400)->header('Content-Type', 'text/plain');
+        }
+        
+        return $apiRequest;
+    }
+
+    private function getTokenOrDefault()
+    {
+        $user = session()->get('user');
+
+        if ($user == null || empty($user)) {
+            return "";
+        }
+
+        return $user;
+    }
+
+    public function getCookieDurationInMinutes()
+    {
+        return $this->cookieDurationInMinutes;
+    }
+
+    public function getApiUrl()
+    {
+        return $this->apiUrl;
+    }
+}
